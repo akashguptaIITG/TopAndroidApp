@@ -1,0 +1,13 @@
+{
+  "db": {
+    "host": "",
+    "port": "",
+    "database": "",
+    "user": "",
+    "password": "",
+    "connectionLimit": ""
+  },
+  "app": {
+    "port": "4400"
+  }
+}
