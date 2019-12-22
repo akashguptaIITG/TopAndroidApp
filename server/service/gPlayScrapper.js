@@ -48,6 +48,10 @@ const getGPlayTopApps = async () => {
   return appInfoArr;
 };
 
+const getAppDetails = async appId => {
+  let url = GPLAY_STORE_URL.APP_DETAILS + appId;
+  
+};
 module.exports = {
   getGPlayTopApps
 };

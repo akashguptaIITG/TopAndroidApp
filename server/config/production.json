@@ -1,0 +1,13 @@
+{
+  "db": {
+    "host": "localhost",
+    "port": "3306",
+    "database": "googleplay",
+    "user": "",
+    "password": "",
+    "connectionLimit": "10"
+  },
+  "app": {
+    "port": "4400"
+  }
+}

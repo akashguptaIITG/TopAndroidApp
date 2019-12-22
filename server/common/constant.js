@@ -12,6 +12,6 @@ module.exports = {
   },
   GPLAY_STORE_URL: {
     TOP_APPS: "https://play.google.com/store/apps/top",
-    APP_DETAILS: "https://play.google.com/store/apps/top?pkg="
+    APP_DETAILS: "https://play.google.com/store/apps/details?id="
   }
 };
