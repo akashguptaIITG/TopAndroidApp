@@ -1,3 +1,3 @@
 module.exports = app => {
-  app.use("api/topApps/", require("./topApps"));
+  app.use("/api/topApps", require("./topApps"));
 };
