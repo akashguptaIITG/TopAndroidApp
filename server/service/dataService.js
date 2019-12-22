@@ -19,9 +19,14 @@ const bulkInsertOrUpdateTopApps = async jsonRequestArr => {
   await Promise.all(promiseArr);
   console.log("bulkInsertOrUpdateTopApps: completed");
 };
-
+const getTopApps = () => {
+  return mysqlConnection
+    .query(queries.getTopApps)
+    .catch(err => console.error(err));
+};
 module.exports = {
   closeConnection,
   insertOrUpdateTopApps,
-  bulkInsertOrUpdateTopApps
+  bulkInsertOrUpdateTopApps,
+  getTopApps
 };

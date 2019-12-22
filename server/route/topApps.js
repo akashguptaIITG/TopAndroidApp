@@ -2,7 +2,10 @@ const router = require("express").Router();
 const gPlayScrapper = require("../service/gPlayScrapper");
 const dataService = require("../service/dataService");
 
-router.get("all", async (req, res) => {});
+router.get("/all", async (req, res) => {
+  let [topApps] = await dataService.getTopApps();
+  return res.json(topApps);
+});
 router.get("/scrap", async (req, res) => {
   let topApps = await gPlayScrapper.getGPlayTopApps();
   await dataService.bulkInsertOrUpdateTopApps(topApps);
