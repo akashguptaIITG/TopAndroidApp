@@ -1,6 +1,8 @@
 require("dotenv").config();
 const appConfig = require("config").get("app");
 const app = require("express")();
+const cors = require("cors");
+app.use(cors());
 require("./route/index")(app);
 
 app.listen(appConfig.port, () =>

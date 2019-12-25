@@ -1,67 +1,57 @@
 import React, { Component } from "react";
-
+import { API_PATH } from "../../lib/constant";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import "../../style/home.css";
 export default class Home extends Component {
+  componentDidMount() {
+    let url = API_PATH.GET_TOP_APPS();
+    this.props.getTopApps({ url });
+  }
   render() {
+    const { topApps, isLoading } = this.props;
+    if (isLoading) {
+      return <img src="loader.png" alt="lodaing..." className="loader" />;
+    }
     return (
-      <div className="container">
-        <h4 className="text-center">Top Free Apps</h4>
-        <div className="row justify-content-md-center">
-          <div className="card-deck">
-            <div className="card">
-              <img
-                className="card-img-top"
-                src="https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128"
-                alt="app"
-              />
-              <div className="card-body">
-                <h6 className="card-title">Whats App</h6>
-                <p className="card-text">Whats App Dev</p>
-                <p className="card-text">Rating</p>
-                <p className="card-text">price</p>
+      <React.Fragment>
+        {topApps.map(topApp => {
+          return (
+            <div className="container">
+              <h4 className="text-center">{topApp.cluster}</h4>
+              <div className="row justify-content-md-center">
+                <div className="card-deck">
+                  {topApp.apps.map(app => (
+                    <div className="card">
+                      <img
+                        className="card-img-top"
+                        src={app.imageUrl}
+                        alt="app"
+                      />
+                      <div className="card-body">
+                        <p className="card-title">{app.title}</p>
+                        <p className="card-text text-muted">{app.developer}</p>
+                        <p className="card-text">
+                          {Array(Math.floor(app.rating)).fill(
+                            <FontAwesomeIcon icon={faStar} />
+                          )}
+                        </p>
+                        {app.price ? (
+                          <p className="card-text">
+                            <FontAwesomeIcon icon={faRupeeSign} /> {app.price}
+                          </p>
+                        ) : (
+                          "free"
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="card">
-              <img
-                className="card-img-top"
-                src="https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128"
-                alt="app"
-              />
-              <div className="card-body">
-                <h6 className="card-title">Whats App</h6>
-                <p className="card-title">Whats Appdev</p>
-                <p>Rating</p>
-                <p>price</p>
-              </div>
-            </div>
-            <div className="card">
-              <img
-                className="card-img-top"
-                src="https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128"
-                alt="app"
-              />
-              <div className="card-body">
-                <h6 className="card-title">Whats App</h6>
-                <p className="card-title">Whats Appdev</p>
-                <p>Rating</p>
-                <p>price</p>
-              </div>
-            </div>
-            <div className="card">
-              <img
-                className="card-img-top"
-                src="https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128"
-                alt="app"
-              />
-              <div className="card-body">
-                <h6 className="card-title">Whats App</h6>
-                <p className="card-title">Whats Appdev</p>
-                <p>Rating</p>
-                <p>price</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          );
+        })}
+      </React.Fragment>
     );
   }
 }

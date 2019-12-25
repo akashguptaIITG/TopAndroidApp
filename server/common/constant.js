@@ -4,7 +4,7 @@ module.exports = {
     CLUSTER_TITLE: ".sv0AUd.bs3Xnd",
     APP_INFO: ".WHE7ib.mpg5gc",
     APP_TITLE: ".WsMG1c.nnK0zc",
-    APP_DEVELOPER: ".KoLSrc",
+    APP_DEVELOPER: ".b8cIId.ReQCgd.KoLSrc",
     APP_IMAGE: ".T75of.QNCnCf",
     APP_PRICE: ".VfPpfd.ZdBevf.i5DZme",
     APP_ID: ".b8cIId.ReQCgd.Q9MA7b",
