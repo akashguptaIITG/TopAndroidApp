@@ -20,6 +20,7 @@ const bulkInsertOrUpdateTopApps = async jsonRequestArr => {
   console.log("bulkInsertOrUpdateTopApps: completed");
 };
 const getTopApps = () => {
+  console.log("getTopApps: started");
   return mysqlConnection
     .query(queries.getTopApps)
     .catch(err => console.error(err));

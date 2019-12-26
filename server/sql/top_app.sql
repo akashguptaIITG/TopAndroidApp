@@ -7,6 +7,7 @@ CREATE TABLE `top_app` (
   `ImageUrl` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Price` double DEFAULT NULL,
   `Rating` double DEFAULT NULL,
+  `AppRank` int(11) DEFAULT '0',
   `CreatedAt` datetime DEFAULT CURRENT_TIMESTAMP,
   `UpdatedAt` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Id`),

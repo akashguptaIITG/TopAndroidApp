@@ -85,7 +85,6 @@ const getAppDetails = async appId => {
     .find("span")
     .first()
     .text();
-  console.log(appDetails);
   console.log("getAppDetails: completed, appId: ", appId);
   return appDetails;
 };

@@ -11,11 +11,12 @@ SET @Developer =jsonRequest->>'$.developer';
 SET @ImageUrl =jsonRequest->>'$.imageUrl';
 SET @Price =jsonRequest->>'$.price';
 SET @Rating =jsonRequest->>'$.rating';
+SET @AppRank =jsonRequest->>'$.appRank';
 SET @AppIdExits =NULL;
 SELECT AppId into @AppIdExits FROM top_app where AppId=@AppId LIMIT 1;
 IF @AppIdExits IS NULL THEN 
-	INSERT INTO top_app(AppId,Cluster,Title,Developer,ImageUrl,Price,Rating)
-    VALUES (@AppId,@Cluster,@Title,@Developer,@ImageUrl,@Price,@Rating);
+	INSERT INTO top_app(AppId,Cluster,Title,Developer,ImageUrl,Price,Rating,AppRank)
+    VALUES (@AppId,@Cluster,@Title,@Developer,@ImageUrl,@Price,@Rating,@AppRank);
 ELSE 
 	UPDATE top_app
     SET AppId= COALESCE(@AppId,AppId),
@@ -25,6 +26,7 @@ ELSE
      ImageUrl= COALESCE(@ImageUrl,ImageUrl),
      Price= COALESCE(@Price,Price),
      Rating= COALESCE(@Rating,Rating),
+     AppRank= COALESCE(@AppRank,AppRank),
      UpdatedAt=CURRENT_TIMESTAMP
      WHERE AppId=@AppId;
  END IF;    
