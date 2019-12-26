@@ -7,7 +7,7 @@ import {
 const initialState = {
   isLoadingTopApps: false,
   isLoadingAppDetails: false,
-  isScrappingTops: false,
+  isScrappingTopApps: false,
   topApps: [],
   appDetails: {},
   error: {}
@@ -40,15 +40,15 @@ export const appReducer = (state = initialState, action) => {
         error: action.error
       });
     case SCRAP_TOP_APPS.LOADING:
-      return Object.assign({}, ...[state], { isScrappingTops: true });
+      return Object.assign({}, ...[state], { isScrappingTopApps: true });
     case SCRAP_TOP_APPS.SUCCESS:
       return Object.assign({}, ...[state], {
-        isScrappingTops: false,
-        topApps: action.resData
+        topApps: action.resData,
+        isScrappingTopApps: false
       });
     case SCRAP_TOP_APPS.FAILURE:
       return Object.assign({}, ...[state], {
-        isScrappingTops: false,
+        isScrappingTopApps: false,
         error: action.error
       });
     default:

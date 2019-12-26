@@ -1,19 +1,20 @@
 import { connect } from "react-redux";
-// import { withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Home from "../component/home/home";
-import { getTopApps } from "../redux/action/action";
+import { getTopApps, scrapTopApps } from "../redux/action/action";
 import { transformTopApps } from "../lib/helper";
 
 const mapStateToProps = state => {
-  let { isLoadingTopApps, topApps } = state.appData;
+  let { isLoadingTopApps, isScrappingTopApps, topApps } = state.appData;
 
   return {
-    isLoading: isLoadingTopApps,
+    isLoading: isLoadingTopApps || isScrappingTopApps,
     topApps: transformTopApps(topApps)
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  getTopApps: reqData => dispatch(getTopApps.request(reqData))
+  getTopApps: reqData => dispatch(getTopApps.request(reqData)),
+  scrapTopApps: reqData => dispatch(scrapTopApps.request(reqData))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

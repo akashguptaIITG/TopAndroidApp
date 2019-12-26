@@ -1,9 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <nav className="navbar-brand">TopAndroidApps</nav>
+      <Link className="navbar-brand" to="/home">
+        TopAndroidApps
+      </Link>
     </nav>
   );
 }

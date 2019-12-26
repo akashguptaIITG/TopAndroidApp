@@ -7,13 +7,16 @@ const getGPlayTopApps = async () => {
   const $ = cheerio.load(data);
   let appInfoArr = [];
   $(GPLAY_STORE_CLASS.CLUSTER).each((index, el) => {
+    let appRank = 0;
     let cluster = $(el)
       .find(GPLAY_STORE_CLASS.CLUSTER_TITLE)
       .text();
     $(el)
       .find(GPLAY_STORE_CLASS.APP_INFO)
       .each((i, appInfoEl) => {
+        appRank++;
         let appInfo = {};
+        appInfo.appRank = appRank;
         appInfo.appId = $(appInfoEl)
           .find(GPLAY_STORE_CLASS.APP_ID)
           .find("a")
@@ -52,31 +55,39 @@ const getGPlayTopApps = async () => {
 
 const getAppDetails = async appId => {
   console.log("getAppDetails: started, appId: ", appId);
-  let appInfo = {};
+  let appDetails = {};
   let url = GPLAY_STORE_URL.APP_DETAILS + appId;
   let data = await request.get(url);
   const $ = cheerio.load(data);
   let screenshots = [];
-  appInfo.appId = appId;
-  appInfo.title = $(GPLAY_STORE_CLASS.APP_DETAILS_TITLE).text();
-  appInfo.developer = $(GPLAY_STORE_CLASS.APP_DETAILS_DEVELOPER_AND_CATEGORY)
+  appDetails.appId = appId;
+  appDetails.title = $(GPLAY_STORE_CLASS.APP_DETAILS_TITLE).text();
+  appDetails.developer = $(GPLAY_STORE_CLASS.APP_DETAILS_DEVELOPER_AND_CATEGORY)
     .first()
     .text();
-  appInfo.category = $(GPLAY_STORE_CLASS.APP_DETAILS_DEVELOPER_AND_CATEGORY)
+  appDetails.category = $(GPLAY_STORE_CLASS.APP_DETAILS_DEVELOPER_AND_CATEGORY)
     .last()
     .text();
-  appInfo.imageUrl = $(GPLAY_STORE_CLASS.APP_DETAILS_IMAGE_URL).attr("src");
+  appDetails.imageUrl = $(GPLAY_STORE_CLASS.APP_DETAILS_IMAGE_URL).attr("src");
   $(GPLAY_STORE_CLASS.APP_DETAILS_SCREENSHOTS).map((i, el) => {
     let screenshot = $(el).data("src");
     if (screenshot) {
       screenshots.push(screenshot);
     }
   });
-  appInfo.screenshots = screenshots;
-  console.log(appInfo);
-  console.log("getAppDetails: completed, appId", appId);
-
-  return appInfo;
+  appDetails.screenshots = screenshots;
+  appDetails.rating = $(GPLAY_STORE_CLASS.APP_DETAILS_RATINGS)
+    .find("div")
+    .first()
+    .attr("aria-label")
+    .replace(/[^0-9.]/gi, "");
+  appDetails.numOfRatings = $(GPLAY_STORE_CLASS.APP_DETAILS_NUM_OF_RATINGS)
+    .find("span")
+    .first()
+    .text();
+  console.log(appDetails);
+  console.log("getAppDetails: completed, appId: ", appId);
+  return appDetails;
 };
 module.exports = {
   getGPlayTopApps,

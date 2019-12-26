@@ -1,3 +1,6 @@
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStarHalf, faStar } from "@fortawesome/free-solid-svg-icons";
 import { MAX_CLUSTER_APPS_SIZE } from "./constant";
 export const actionTypeCreator = action => ({
   REQUEST: action + "_REQUEST",
@@ -15,6 +18,7 @@ export const actionCreator = actionType => ({
 });
 
 export const transformTopApps = topApps => {
+  debugger;
   let transformedTopApps = [];
   if (!topApps.length) return transformedTopApps;
   topApps.forEach(topApp => {
@@ -31,4 +35,14 @@ export const transformTopApps = topApps => {
     }
   });
   return transformedTopApps;
+};
+
+export const getStars = rating => {
+  let starRating = Array(Math.floor(rating)).fill(
+    <FontAwesomeIcon icon={faStar} />
+  );
+  if (Math.ceil(rating) - Math.floor(rating)) {
+    starRating.push(<FontAwesomeIcon icon={faStarHalf} />);
+  }
+  return starRating;
 };

@@ -9,7 +9,8 @@ router.get("/topApps/all", async (req, res) => {
 router.get("/topApps/scrap", async (req, res) => {
   let topApps = await gPlayScrapper.getGPlayTopApps();
   await dataService.bulkInsertOrUpdateTopApps(topApps);
-  return res.send("Success");
+  let [fetchedTopApps] = await dataService.getTopApps();
+  return res.json(fetchedTopApps);
 });
 router.get("/details/:id", async (req, res) => {
   let appId = req.params.id;

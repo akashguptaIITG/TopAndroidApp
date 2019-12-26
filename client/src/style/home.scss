@@ -1,0 +1,26 @@
+.home {
+  .container {
+    margin-top: 24px;
+  }
+  .card-deck {
+    padding: 10px;
+  }
+  .card {
+    display: table-cell;
+    width: 160px;
+  }
+  .card .card-text,
+  .card .card-title {
+    width: 130px;
+    max-height: 22px;
+    overflow: hidden;
+    display: inline-block;
+  }
+}
+.loader {
+  position: fixed;
+  top: 40%;
+  left: 45%;
+  width: 100px;
+  height: 100px;
+}
